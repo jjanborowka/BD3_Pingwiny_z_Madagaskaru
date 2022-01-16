@@ -15,7 +15,7 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 def main():
-    MINUTES_DELAY = 15
+    # MINUTES_DELAY = 15
     # start Spark session
     spark = SparkSession.builder.appName("SparkDemo").enableHiveSupport().getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
@@ -30,19 +30,17 @@ def main():
     weather = weather.withColumn("key", F.concat(F.col("last_updated").substr(0,10), F.lit("-"), F.col("last_updated").substr(12,2)))
     buses = buses.withColumn("key", F.concat(F.col("Time").substr(0,10), F.lit("-"), F.col("Time").substr(12,2)))
 
-    logger.info('Filtering by time')
+    # logger.info('Filtering by time')
 
     # filter buses to be from last 15 minutes
-    current_time  = str(datetime.now() - timedelta(minutes = MINUTES_DELAY)).split('.')[0]
-    buses = buses.withColumn('Time',F.to_timestamp(F.col('Time'), 'yyyy-MM-dd HH:mm:ss').alias('Time'))
-    buses = buses.filter(F.col('Time') > F.to_timestamp(F.lit(current_time)))
+    # current_time  = str(datetime.now() - timedelta(minutes = MINUTES_DELAY)).split('.')[0]
+    # buses = buses.withColumn('Time',F.to_timestamp(F.col('Time'), 'yyyy-MM-dd HH:mm:ss').alias('Time'))
+    # buses = buses.filter(F.col('Time') > F.to_timestamp(F.lit(current_time)))
+    
     logger.info('Writing to HDFS')
 
     #join data
-    buses.show(5)
-    weather.show(5)
     df = buses.join(weather, ['key'], "left")
-    df.show(5)
     df.write.mode("append").format("parquet").partitionBy("key").saveAsTable("masterdf")
     
     # usun csv z autobusami
