@@ -20,7 +20,7 @@ def main():
     spark = SparkSession.builder.appName("SparkDemo").enableHiveSupport().getOrCreate()
     spark.sparkContext.setLogLevel("ERROR")
     logger.info("Starting spark application")
-    
+
     logger.info("Reading Files")
     weather = spark.read.format('csv').options(header='true', inferschema='true').load('hdfs://localhost:8020/user/ficp/projekt/weather/weather.csv')
     buses = spark.read.format('csv').options(header='true', inferschema='true').load('hdfs://localhost:8020/user/ficp/projekt/ztm/ztm.csv')
@@ -34,22 +34,22 @@ def main():
 
     # filter buses to be from last 15 minutes
     # current_time  = str(datetime.now() - timedelta(minutes = MINUTES_DELAY)).split('.')[0]
-    # buses = buses.withColumn('Time',F.to_timestamp(F.col('Time'), 'yyyy-MM-dd HH:mm:ss').alias('Time'))
+    buses = buses.withColumn('Time',F.to_timestamp(F.col('Time'), 'yyyy-MM-dd HH:mm:ss').alias('Time'))
     # buses = buses.filter(F.col('Time') > F.to_timestamp(F.lit(current_time)))
-    
+
     logger.info('Writing to HDFS')
 
     #join data
     df = buses.join(weather, ['key'], "left")
     df.write.mode("append").format("parquet").partitionBy("key").saveAsTable("masterdf")
-    
+
     # usun csv z autobusami
-    subprocess.call(["hdfs", "dfs", "-rm", "-f", '/user/ficp/projekt/ztm/ztm.csv'])
+    # subprocess.call(["hdfs", "dfs", "-rm", "-f", '/user/ficp/projekt/ztm/ztm.csv'])
 
     logger.info("Ending spark application")
     spark.stop()
     return None
-    
+
 # Starting point for PySpark
 if __name__ == '__main__':
     main()
