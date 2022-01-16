@@ -180,6 +180,31 @@
             <zIndex>0</zIndex>
         </connections>
         <connections>
+            <id>a3d00ded-dc21-3eed-0000-000000000000</id>
+            <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>87903aa9-528e-393e-0000-000000000000</groupId>
+                <id>42fb8653-6714-3c7f-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>success</selectedRelationships>
+            <source>
+                <groupId>87903aa9-528e-393e-0000-000000000000</groupId>
+                <id>4ff16b4a-8288-3b6b-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
             <id>ad70f5c4-52a4-33ae-0000-000000000000</id>
             <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
             <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
@@ -1556,6 +1581,134 @@
             <type>org.apache.nifi.processors.standard.EvaluateJsonPath</type>
         </processors>
         <processors>
+            <id>42fb8653-6714-3c7f-0000-000000000000</id>
+            <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>752.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-hadoop-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.14.0</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Hadoop Configuration Resources</key>
+                        <value>
+                            <name>Hadoop Configuration Resources</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>kerberos-credentials-service</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.kerberos.KerberosCredentialsService</identifiesControllerService>
+                            <name>kerberos-credentials-service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Principal</key>
+                        <value>
+                            <name>Kerberos Principal</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Keytab</key>
+                        <value>
+                            <name>Kerberos Keytab</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Password</key>
+                        <value>
+                            <name>Kerberos Password</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Relogin Period</key>
+                        <value>
+                            <name>Kerberos Relogin Period</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Additional Classpath Resources</key>
+                        <value>
+                            <name>Additional Classpath Resources</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>file_or_directory</key>
+                        <value>
+                            <name>file_or_directory</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>recursive</key>
+                        <value>
+                            <name>recursive</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Hadoop Configuration Resources</key>
+                        <value>/usr/local/hadoop/etc/hadoop/hdfs-site.xml,/usr/local/hadoop/etc/hadoop/core-site.xml</value>
+                    </entry>
+                    <entry>
+                        <key>kerberos-credentials-service</key>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Principal</key>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Keytab</key>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Password</key>
+                    </entry>
+                    <entry>
+                        <key>Kerberos Relogin Period</key>
+                        <value>4 hours</value>
+                    </entry>
+                    <entry>
+                        <key>Additional Classpath Resources</key>
+                    </entry>
+                    <entry>
+                        <key>file_or_directory</key>
+                        <value>/user/ficp/projekt/ztm/</value>
+                    </entry>
+                    <entry>
+                        <key>recursive</key>
+                        <value>true</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>30 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>DeleteHDFS</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>RUNNING</state>
+            <style/>
+            <type>org.apache.nifi.processors.hadoop.DeleteHDFS</type>
+        </processors>
+        <processors>
             <id>477c36cd-f4d7-3786-0000-000000000000</id>
             <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
             <position>
@@ -1853,7 +2006,7 @@
             <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
             <position>
                 <x>0.0</x>
-                <y>552.0</y>
+                <y>536.0</y>
             </position>
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
@@ -1930,14 +2083,14 @@
                     </entry>
                 </properties>
                 <runDurationMillis>0</runDurationMillis>
-                <schedulingPeriod>*/20 * * * * ?</schedulingPeriod>
-                <schedulingStrategy>CRON_DRIVEN</schedulingStrategy>
+                <schedulingPeriod>20 mins</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
                 <yieldDuration>1 sec</yieldDuration>
             </config>
             <executionNodeRestricted>false</executionNodeRestricted>
             <name>JoinAndWriteToMasterDF</name>
             <relationships>
-                <autoTerminate>true</autoTerminate>
+                <autoTerminate>false</autoTerminate>
                 <name>success</name>
             </relationships>
             <state>RUNNING</state>
@@ -2034,8 +2187,8 @@
             <id>90aa4068-efeb-3551-0000-000000000000</id>
             <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
             <position>
-                <x>1536.0</x>
-                <y>552.0</y>
+                <x>1768.0</x>
+                <y>536.0</y>
             </position>
             <bundle>
                 <artifact>nifi-hbase-nar</artifact>
@@ -2123,7 +2276,7 @@
                     </entry>
                     <entry>
                         <key>Column Qualifier</key>
-                        <value>${filename:substringBefore('.')}</value>
+                        <value>${path:substringBefore('.')}</value>
                     </entry>
                     <entry>
                         <key>timestamp</key>
@@ -2148,7 +2301,7 @@
                 <autoTerminate>true</autoTerminate>
                 <name>success</name>
             </relationships>
-            <state>STOPPED</state>
+            <state>RUNNING</state>
             <style/>
             <type>org.apache.nifi.hbase.PutHBaseCell</type>
         </processors>
@@ -2636,8 +2789,8 @@
             <id>b18a80de-6df9-370b-0000-000000000000</id>
             <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
             <position>
-                <x>920.0</x>
-                <y>552.0</y>
+                <x>1296.0</x>
+                <y>536.0</y>
             </position>
             <bundle>
                 <artifact>nifi-hadoop-nar</artifact>
@@ -2850,7 +3003,7 @@
                 <autoTerminate>false</autoTerminate>
                 <name>success</name>
             </relationships>
-            <state>STOPPED</state>
+            <state>RUNNING</state>
             <style/>
             <type>org.apache.nifi.processors.hadoop.GetHDFS</type>
         </processors>
@@ -3316,8 +3469,8 @@
             <id>e4b6b311-f9d6-300f-0000-000000000000</id>
             <parentGroupId>87903aa9-528e-393e-0000-000000000000</parentGroupId>
             <position>
-                <x>464.0</x>
-                <y>552.0</y>
+                <x>872.0</x>
+                <y>536.0</y>
             </position>
             <bundle>
                 <artifact>nifi-standard-nar</artifact>
@@ -3394,7 +3547,7 @@
                     </entry>
                 </properties>
                 <runDurationMillis>0</runDurationMillis>
-                <schedulingPeriod>30 * * * * ?</schedulingPeriod>
+                <schedulingPeriod>0 0/30 * * * ?</schedulingPeriod>
                 <schedulingStrategy>CRON_DRIVEN</schedulingStrategy>
                 <yieldDuration>1 sec</yieldDuration>
             </config>
@@ -3404,10 +3557,10 @@
                 <autoTerminate>true</autoTerminate>
                 <name>success</name>
             </relationships>
-            <state>STOPPED</state>
+            <state>RUNNING</state>
             <style/>
             <type>org.apache.nifi.processors.standard.ExecuteProcess</type>
         </processors>
     </snippet>
-    <timestamp>01/15/2022 16:44:26 UTC</timestamp>
+    <timestamp>01/16/2022 14:56:32 UTC</timestamp>
 </template>
